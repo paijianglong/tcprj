@@ -1,10 +1,14 @@
 #include "tccustomedqwtplot.h"
+#include "qwt_plot_panner.h"
+#include "qwt_plot_directpainter.h"
+#include "systemconfig.h"
 #include <qwt_plot_canvas.h>
 #include <qwt_plot_curve.h>
 #include <qwt_plot_layout.h>
 #include <qwt_plot_grid.h>
 #include <qwt_symbol.h>
 #include <qwt_legend.h>
+#include <QTimer>
 
 TCCustomedQwtPlot::TCCustomedQwtPlot(QWidget *parent) : QwtPlot(parent)
 {
@@ -30,31 +34,36 @@ TCCustomedQwtPlot::TCCustomedQwtPlot(QWidget *parent) : QwtPlot(parent)
     setAxisScale( QwtPlot::xBottom, AXIS_X_START, AXIS_X_END );
     setAxisScale( QwtPlot::yLeft, AXIS_Y_START, AXIS_Y_END );
 
-    QwtLegend *legend = new QwtLegend;
-    insertLegend( new QwtLegend() );
+    // Legend
+    QwtLegend* pLegend = new QwtLegend;
+    pLegend->setDefaultItemMode(QwtLegendData::Checkable);
+    insertLegend( pLegend, QwtPlot::RightLegend );
 
-    QwtPlotGrid *grid = new QwtPlotGrid();
-    grid->attach( this );
+    // Plot grid
+    QwtPlotGrid* pGrid = new QwtPlotGrid();
+    pGrid->setPen(Qt::white, 4);
+    pGrid->attach( this );
 
+    // Plot curve
     QwtPlotCurve *curve = new QwtPlotCurve();
     curve->setTitle( LEGEND_TITLE );
-    curve->setPen( Qt::blue, 4 ),
+    curve->setPen( Qt::blue, 4 );
     curve->setRenderHint( QwtPlotItem::RenderAntialiased, true );
-
-    QwtSymbol *symbol = new QwtSymbol( QwtSymbol::Ellipse,
-        QBrush( Qt::yellow ), QPen( Qt::red, 2 ), QSize( 8, 8 ) );
-    curve->setSymbol( symbol );
-
-    QPolygonF points;
-    points << QPointF( 0.0, 4.4 ) << QPointF( 1.0, 3.0 )
-        << QPointF( 2.0, 4.5 ) << QPointF( 3.0, 6.8 )
-        << QPointF( 4.0, 7.9 ) << QPointF( 5.0, 7.1 );
-    curve->setSamples( points );
-
-    curve->attach(this);
 }
 
 TCCustomedQwtPlot::~TCCustomedQwtPlot()
 {
 
+}
+
+void TCCustomedQwtPlot::SetTimerInterval(int msec)
+{
+
+}
+
+void TCCustomedQwtPlot::t_SetTimer()
+{
+    m_pTimer = new QTimer();
+    m_pTimer->setInterval(10);
+    m_pTimer->setTimerType(Qt::PreciseTimer);
 }
