@@ -8,12 +8,13 @@
 #define PLOT_V_MARGIN_RATIO (0.10)
 #define CURVE_TITLE "温度实时采集系统"
 #define LEGEND_TITLE "当前温度"
-#define AXIS_X_TITLE "温度(℃)"
-#define AXIS_Y_TITLE "时间(s)"
+#define AXIS_X_TITLE "温度(C)"
+#define AXIS_Y_TITLE "时间(S)"
 #define AXIS_X_START 0
-#define AXIS_X_END 1800
-#define AXIS_Y_START 0
-#define AXIS_Y_END 40
+#define AXIS_X_END 100
+#define AXIS_Y_START (0.0)
+#define AXIS_Y_END (40.0)
+#define MARGIN 20
 
 //?Qt5.4 may have bugs when excute below code, check later (2015-01-25 21:49)
 //class SystemConfig

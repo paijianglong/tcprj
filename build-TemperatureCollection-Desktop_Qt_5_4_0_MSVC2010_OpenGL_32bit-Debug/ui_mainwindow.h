@@ -49,7 +49,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1080, 720);
+        MainWindow->resize(640, 480);
         QIcon icon;
         icon.addFile(QStringLiteral("../../icon/chrome.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -93,14 +93,20 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         tccustomedQwtPlot = new TCCustomedQwtPlot(centralWidget);
         tccustomedQwtPlot->setObjectName(QStringLiteral("tccustomedQwtPlot"));
-        tccustomedQwtPlot->setGeometry(QRect(30, 30, 1000, 500));
+        tccustomedQwtPlot->setGeometry(QRect(60, 20, 511, 281));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(3);
+        sizePolicy.setVerticalStretch(3);
+        sizePolicy.setHeightForWidth(tccustomedQwtPlot->sizePolicy().hasHeightForWidth());
+        tccustomedQwtPlot->setSizePolicy(sizePolicy);
+        tccustomedQwtPlot->setMouseTracking(true);
         MainWindow->setCentralWidget(centralWidget);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1080, 23));
+        menuBar->setGeometry(QRect(0, 0, 640, 23));
         menu_file = new QMenu(menuBar);
         menu_file->setObjectName(QStringLiteral("menu_file"));
         menu_file->setTearOffEnabled(false);
